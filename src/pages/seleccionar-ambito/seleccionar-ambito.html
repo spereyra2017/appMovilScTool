@@ -1,0 +1,30 @@
+<!--
+  Generated template for the SeleccionarMunicipioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>Selecc:</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-item>
+      <ion-label>Employee</ion-label>
+      <ion-select [(ngModel)]="Municipio">
+        <ion-option>Maldonado</ion-option>
+        <ion-option>Piriapolis</ion-option>
+        <ion-option>San Carlos</ion-option>
+        <ion-option>Aigua</ion-option>
+      </ion-select>
+  
+    </ion-item>
+    <button ion-button (click)="logEvent(Municipio)">
+      Comenzar Municipio
+    </button>
+  </ion-content>
