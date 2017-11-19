@@ -18,6 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SeleccionarMunicipioPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
   public Municipio;
   public Municipios;
@@ -27,7 +28,9 @@ export class SeleccionarMunicipioPage {
     //console.log('ionViewDidLoad SeleccionarMunicipioPage');
   }
   siguientePagina() {
-    console.log("hola")
-    // this.navCtrl.push("SeleccionarAmbitoPage")
+
+    this.navCtrl.push("SeleccionarAmbitoPage", {
+      municipio: this.Municipio
+    })
   }
 }

@@ -16,13 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'seleccionar-ambito.html',
 })
 export class SeleccionarAmbitoPage {
-
+  public municipio = this.navParams.get('municipio');
+  public ambito
+  public subAmbito
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
-    console.log("hola!")
-    console.log('ionViewDidLoad SeleccionarAmbitoPage');
   }
+  siguientePagina(ambito, subAmbito) {
+    this.navCtrl.push("SeleccionarGradoPage", {
+      ambito: this.ambito,
+      subAmbito: this.subAmbito
+    })
 
+  }
 }

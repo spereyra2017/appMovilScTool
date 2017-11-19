@@ -9,5 +9,8 @@ import { SeleccionarGradoPage } from './seleccionar-grado';
   imports: [
     IonicPageModule.forChild(SeleccionarGradoPage),
   ],
+  exports: [
+    SeleccionarGradoPage
+  ]
 })
-export class SeleccionarGradoPageModule {}
+export class SeleccionarGradoPageModule { }

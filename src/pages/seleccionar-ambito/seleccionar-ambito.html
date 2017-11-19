@@ -5,26 +5,39 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
-    <ion-navbar>
-      <ion-title>Selecc:</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content padding>
-    <ion-item>
-      <ion-label>Employee</ion-label>
-      <ion-select [(ngModel)]="Municipio">
-        <ion-option>Maldonado</ion-option>
-        <ion-option>Piriapolis</ion-option>
-        <ion-option>San Carlos</ion-option>
-        <ion-option>Aigua</ion-option>
-      </ion-select>
-  
-    </ion-item>
-    <button ion-button (click)="logEvent(Municipio)">
-      Comenzar Municipio
-    </button>
-  </ion-content>
+
+  <ion-navbar>
+    <ion-title>Seleccionar ambito y subambito</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Ambito</ion-label>
+    <ion-select [(ngModel)]="ambito">
+      <ion-option>ambito1</ion-option>
+      <ion-option>ambito2</ion-option>
+      <ion-option>ambito3</ion-option>
+      <ion-option>ambito4</ion-option>
+    </ion-select>
+
+  </ion-item>
+
+  <ion-item>
+    <ion-label>SubAmbito</ion-label>
+    <ion-select [(ngModel)]=subAmbito>
+      <ion-option>SubAmbito1</ion-option>
+      <ion-option>SubAmbito2</ion-option>
+      <ion-option>SubAmbito3</ion-option>
+      <ion-option>SubAmbit4</ion-option>
+    </ion-select>
+
+  </ion-item>
+
+
+  <button ion-button  [disabled]= "!subAmbito || !ambito" (click)="siguientePagina(ambito,subAmbito)" >
+    Comenzar Municipio
+  </button>
+</ion-content>
