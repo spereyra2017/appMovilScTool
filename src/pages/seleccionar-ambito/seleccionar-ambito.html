@@ -14,30 +14,29 @@
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label>Ambito</ion-label>
-    <ion-select [(ngModel)]="ambito">
-      <ion-option>ambito1</ion-option>
-      <ion-option>ambito2</ion-option>
-      <ion-option>ambito3</ion-option>
-      <ion-option>ambito4</ion-option>
-    </ion-select>
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-label>Ambito</ion-label>
+        <ion-select [(ngModel)]="ambito">
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-label>SubAmbito</ion-label>
+        <ion-select [(ngModel)]=subAmbito>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div>
 
-  </ion-item>
+    <button ion-button [disabled]="!subAmbito || !ambito" (click)="siguientePagina(ambito,subAmbito)">
+      Siguiente
+    </button>
+  </div>
 
-  <ion-item>
-    <ion-label>SubAmbito</ion-label>
-    <ion-select [(ngModel)]=subAmbito>
-      <ion-option>SubAmbito1</ion-option>
-      <ion-option>SubAmbito2</ion-option>
-      <ion-option>SubAmbito3</ion-option>
-      <ion-option>SubAmbit4</ion-option>
-    </ion-select>
-
-  </ion-item>
-
-
-  <button ion-button  [disabled]= "!subAmbito || !ambito" (click)="siguientePagina(ambito,subAmbito)" >
-    Comenzar Municipio
-  </button>
 </ion-content>

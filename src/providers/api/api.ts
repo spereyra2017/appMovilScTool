@@ -6,13 +6,23 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+  url: string = 'http://196.168.51.1:8080/rest';
 
   constructor(public http: HttpClient) {
   }
+  /*
+  getGrado(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
+  }
+  getAmbito(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
+  }*/
+  getMunicipio(endpoint: string, params?: any, reqOpts?: any) {
 
+    return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
+  }
   get(endpoint: string, params?: any, reqOpts?: any) {
-    
+
     return this.http.get(this.url + '/' + endpoint, reqOpts);
   }
 

@@ -35,9 +35,13 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
+    this.navCtrl.push('SeleccionarMunicipioPage');
+    
+    /*this.user.login(this.account).subscribe((resp) => {
+
     }, (err) => {
-      this.navCtrl.push('SeleccionarMunicipioPage');
+      console.log("hola")
+      
       
      // this.navCtrl.push(MainPage);
       // Unable to log in
@@ -48,6 +52,6 @@ export class LoginPage {
       });
      // toast.present();
     });
-
+*/
   }
 }

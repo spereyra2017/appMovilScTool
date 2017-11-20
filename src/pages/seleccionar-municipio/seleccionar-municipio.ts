@@ -1,6 +1,6 @@
+import { Encuesta } from './../../providers/encuesta/encuesta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 /**
  * Generated class for the SeleccionarMunicipioPage page.
  *
@@ -17,15 +17,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SeleccionarMunicipioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams
+    , public encuesta: Encuesta) {
+
   }
   public Municipio;
   public Municipios;
 
   public items;
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad SeleccionarMunicipioPage');
+    console.log("hola!!")
+
+
+   /** this.encuesta.selectMunicipio()
+      .subscribe(municipios => {
+        console.log(municipios)
+      }) */
   }
   siguientePagina() {
 

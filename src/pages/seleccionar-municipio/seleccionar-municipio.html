@@ -7,25 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Seleccionar:</ion-title>
+    <ion-title>Seleccionar Municipio:</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <ion-item>
+  <div>
+    <ion-list>
 
-    <ion-label>Municipios</ion-label>
-    <ion-select [(ngModel)]="Municipio">
-      <ion-option>Maldonado</ion-option>
-      <ion-option>Piriapolis</ion-option>
-      <ion-option>San Carlos</ion-option>
-      <ion-option>Aigua</ion-option>
-    </ion-select>
+      <ion-item>
+        <ion-label>Municipios</ion-label>
+        <ion-select [(ngModel)]="Municipio">
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-  </ion-item>
-  <button ion-button  [disabled]= "!Municipio " (click)="siguientePagina()">
-    Comenzar Municipio
-  </button>
+  </div>
+  <div>
+
+    <button ion-button [disabled]="!Municipio " (click)="siguientePagina()">
+      Siguiente
+    </button>
+  </div>
 </ion-content>
