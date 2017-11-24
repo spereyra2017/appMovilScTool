@@ -10,13 +10,13 @@ export class Api {
 
   constructor(public http: HttpClient) {  
   }
-  /*
-  getGrado(endpoint: string, params?: any, reqOpts?: any) {
-    return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
-  }
-  getAmbito(endpoint: string, params?: any, reqOpts?: any) {
-    return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
+
+  /*getGrado(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/grados/' + endpoint, reqOpts);
   }*/
+  getAmbito(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/ambitos/' + endpoint, reqOpts);
+  }
   getMunicipio(endpoint: string, params?: any, reqOpts?: any) {
     return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
   }

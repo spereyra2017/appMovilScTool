@@ -28,13 +28,13 @@ export class Encuesta {
     return seq;*/
   }
   selectAmbito() {
-    /*let seq = this.api.getAmbito('').share();
+    let seq = this.api.getAmbito('all').share();
     seq.subscribe((res: any) => {
 
     }, err => {
       console.error('ERROR', err);
     });
-    return seq;*/
+    return seq;
   }
   crearEncuesta(infoEncuesta: any) {
     let seq = this.api.get('addSurvey', infoEncuesta).share();

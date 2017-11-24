@@ -18,16 +18,18 @@
     <ion-list>
       <ion-item>
         <ion-label>Ambito</ion-label>
-        <ion-select [(ngModel)]="ambito">
+        <ion-select [(ngModel)]="ambito" (ionChange)="ambitoElegido($event)">
+            <ion-option *ngFor="let key of this.ambi" value="{{key.name}}"   >{{key.name}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
   </div>
   <div>
-    <ion-list>
-      <ion-item>
+    <ion-list >
+      <ion-item >
         <ion-label>SubAmbito</ion-label>
-        <ion-select [(ngModel)]=subAmbito>
+        <ion-select [(ngModel)]="subAmbito" [disabled]="!ambito">
+            <ion-option *ngFor="let key of this.subAmbi" value="{{key.name}}">{{key.name}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
