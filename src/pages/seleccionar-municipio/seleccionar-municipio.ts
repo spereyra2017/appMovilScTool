@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { Encuesta } from './../../providers/encuesta/encuesta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -22,20 +23,33 @@ export class SeleccionarMunicipioPage {
 
   }
   public Municipio;
-  public Municipios;
-
   public items;
+  public muni= [];
+
+
   ionViewDidLoad() {
-    console.log("hola!!")
-
-
-   /** this.encuesta.selectMunicipio()
+    this.encuesta.selectMunicipio()
       .subscribe(municipios => {
-        console.log(municipios)
-      }) */
+        // let aux2=JSON.parse(municipios);
+        const userStr = JSON.stringify(municipios);
+        const items = JSON.parse(userStr, (key, value) => {
+          if (typeof value === 'string') {
+            return value.toUpperCase();
+          }
+          return value;
+        });
+        console.log(items);
+        let arreglo: [any];
+
+        arreglo = items;
+        arreglo.forEach(element => {
+          this.muni.push( element.name) ;
+        });
+      })
   }
   siguientePagina() {
-
+    console.log(this.Municipio);
+    
     this.navCtrl.push("SeleccionarAmbitoPage", {
       municipio: this.Municipio
     })

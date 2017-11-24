@@ -14,12 +14,13 @@
 <ion-content padding>
   <div>
     <ion-list>
-
-      <ion-item>
-        <ion-label>Municipios</ion-label>
-        <ion-select [(ngModel)]="Municipio">
-        </ion-select>
-      </ion-item>
+        <ion-item>
+            <ion-label>Tipo de Dato</ion-label>
+            <ion-select [(ngModel)]="Municipio">
+              <ion-option *ngFor="let key of this.muni" value="{{key}}">{{key}}</ion-option>
+            </ion-select>
+          </ion-item>
+     
     </ion-list>
 
   </div>

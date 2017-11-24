@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Api } from '../api/api';
+
 @Injectable()
 export class Encuesta {
   _user: any;
@@ -10,11 +11,11 @@ export class Encuesta {
 
   selectMunicipio() {
     let seq = this.api.getMunicipio('all').share();
-    seq.subscribe((res: any) => {
-
-    }, err => {
-      console.error('ERROR', err);
-    });
+    seq
+      .subscribe((res: any) => {
+      }, err => {
+        console.error('ERROR', err);
+      });
     return seq;
   }
   selectGrado() {

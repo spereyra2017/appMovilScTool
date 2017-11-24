@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'http://196.168.51.1:8080/rest';
+  url: string = 'http://192.168.100.189:8080/rest';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient) {  
   }
   /*
   getGrado(endpoint: string, params?: any, reqOpts?: any) {
@@ -18,7 +18,6 @@ export class Api {
     return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
   }*/
   getMunicipio(endpoint: string, params?: any, reqOpts?: any) {
-
     return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
   }
   get(endpoint: string, params?: any, reqOpts?: any) {
