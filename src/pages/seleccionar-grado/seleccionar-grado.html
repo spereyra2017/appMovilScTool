@@ -15,26 +15,26 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label>Grado</ion-label>
-    <ion-select [(ngModel)]="grado">
-      <ion-option>Grado1</ion-option>
-      <ion-option>Grado2</ion-option>
-      <ion-option>Grado3</ion-option>
-      <ion-option>Grado4</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Nivel</ion-label>
-    <ion-select [(ngModel)]="nivel">
-      <ion-option>Nivel1</ion-option>
-      <ion-option>Nivel2</ion-option>
-      <ion-option>Nivel3</ion-option>
-      <ion-option>Nivel4</ion-option>
-    </ion-select>
-  </ion-item>
-
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-label>Grado</ion-label>
+        <ion-select [(ngModel)]="grado" (ionChange)="gradoElegido($event)">
+            <ion-option *ngFor="let key of this.gras" value="{{key.name}}"   >{{key.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div>
+    <ion-list >
+      <ion-item >
+        <ion-label>Nivel</ion-label>
+        <ion-select [(ngModel)]="nivel" [disabled]="!grado">
+            <ion-option *ngFor="let key of this.nivs" value="{{key.name}}">{{key.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
   <button ion-button [disabled]="!grado || !nivel" (click)="siguientePagina(grado,nivel)">
     Enviar encuesta parcial
   </button>

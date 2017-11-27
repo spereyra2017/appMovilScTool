@@ -11,9 +11,9 @@ export class Api {
   constructor(public http: HttpClient) {  
   }
 
-  /*getGrado(endpoint: string, params?: any, reqOpts?: any) {
-    return this.http.get(this.url + '/grados/' + endpoint, reqOpts);
-  }*/
+  getGrado(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/degrees/' + endpoint, reqOpts);
+  }
   getAmbito(endpoint: string, params?: any, reqOpts?: any) {
     return this.http.get(this.url + '/ambitos/' + endpoint, reqOpts);
   }

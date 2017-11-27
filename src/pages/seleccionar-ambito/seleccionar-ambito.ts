@@ -41,28 +41,11 @@ export class SeleccionarAmbitoPage {
           }
           return value;
         });
-        //console.log(items);
-       
-
+        
         this.arreglo = items; // GUARDO LOS AMBITOS DEL SISTEMA
         this.arreglo.forEach(element => { // RECORRO LOS AMBITOS 
           this.ambi.push(element); // GUARDO EL NOMBRE DE CADA AMBITO EN UN ARRAY
         });
-
-        /*this.arreglo.forEach(ambito => {
-          ambito.subAmbitos.forEach(subAmbito => { // POR CADA AMBITO RECORRO SUS SUBAMBITOS
-
-            this.arreglo.forEach(ambitoPosta => {
-
-              if (subAmbito.groupId == ambitoPosta.id) {
-                console.log(subAmbito.name);
-                this.subAmbi.push(subAmbito);
-              }
-            });
-
-          });
-
-        });*/
 
       });      
 

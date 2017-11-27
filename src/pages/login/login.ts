@@ -1,57 +1,74 @@
+import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
-
+import { IonicPage, NavController, ToastController, Platform } from 'ionic-angular';
 import { User } from '../../providers/providers';
 
+class formData {
+  constructor() { }
+  public USERNAME: any;
+  public PASSWORD: any;
+}
 @IonicPage({
-  name:'LoginPage'
+  name: 'LoginPage'
 })
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
+
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
-  };
 
-  // Our translated text strings
   private loginErrorString: string;
+  public username: AbstractControl;
+  public password: AbstractControl;
+  loginForm: FormGroup;
+  errorMessage: string = null;
+  public usuario = new formData();
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    private fb: FormBuilder) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    this.loginForm = fb.group({
+      'username': ['', Validators.compose([Validators.required])],
+      'password': ['', Validators.compose([Validators.required])]
+    });
+
+
+    this.username = this.loginForm.controls['username'];
+    this.password = this.loginForm.controls['password'];
+
+
+
+    //  this.translateService.get('LOGIN_ERROR').subscribe((value) => {
+    //  this.loginErrorString = value;
+    // })
+
+
   }
 
+
+
+  public setDataForm(): void {
+    this.usuario.USERNAME = this.loginForm.value.username;
+    this.usuario.PASSWORD = this.loginForm.value.password;
+  }
   // Attempt to login in through our User service
   doLogin() {
-    this.navCtrl.push('SeleccionarMunicipioPage');
-    
-    /*this.user.login(this.account).subscribe((resp) => {
-
+    this.setDataForm();
+    this.user.login(this.usuario).subscribe((resp) => {
+      this.navCtrl.push("MapPage");
     }, (err) => {
-      console.log("hola")
-      
-      
-     // this.navCtrl.push(MainPage);
-      // Unable to log in
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: err + "error !",
         duration: 3000,
         position: 'top'
       });
-     // toast.present();
+      toast.present();
     });
-*/
   }
 }

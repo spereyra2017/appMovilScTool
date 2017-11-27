@@ -19,13 +19,13 @@ export class Encuesta {
     return seq;
   }
   selectGrado() {
-    /*let seq = this.api.getGrado('').share();
+    let seq = this.api.getGrado('all').share();
     seq.subscribe((res: any) => {
 
     }, err => {
       console.error('ERROR', err);
     });
-    return seq;*/
+    return seq;
   }
   selectAmbito() {
     let seq = this.api.getAmbito('all').share();

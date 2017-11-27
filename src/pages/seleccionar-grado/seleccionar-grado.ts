@@ -21,14 +21,37 @@ export class SeleccionarGradoPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    //public encuesta: Encuesta,
-    public alertCtrl: AlertController) {
+    public encuesta: Encuesta,
+    public alertCtrl: AlertController
+  ) {
   }
 
   public grado;
   public nivel;
+  public nivs: [any];
+  public gras: [any];
 
   ionViewDidLoad() {
+
+    console.log("ambito: " + this.ambito + "Subambito: " + this.subAmbito);
+    this.encuesta.selectGrado()
+      .subscribe(grados => {
+
+        const userStr = JSON.stringify(grados);
+        const items = JSON.parse(userStr, (key, value) => {
+          if (typeof value === 'string') {
+            return value.toUpperCase();
+          }
+          return value;
+        });
+        
+        this.gras = items;
+        console.log("Los grados del subambito son: " );
+        this.gras.forEach(element => {
+          console.log(element.name);
+        });
+       
+      });
   }
 
   siguientePagina(gradoElegido, nivelElegido) {
@@ -39,7 +62,7 @@ export class SeleccionarGradoPage {
         {
           text: 'Aceptar',
           handler: () => {
-            this.navCtrl.push("SeleccionarMunicipioPage")
+            //  this.navCtrl.push("SeleccionarMunicipioPage")
           }
         }
       ]
@@ -72,6 +95,13 @@ export class SeleccionarGradoPage {
          mensajeCreado.present()
        });*/
     //si entra aca, primero mostrar mensaje ALERT y luego redireccion pagina a municipio.
+  }
+
+
+
+
+  gradoElegido($event) {
+    console.log($event);
   }
 
 }
