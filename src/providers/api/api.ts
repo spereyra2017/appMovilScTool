@@ -25,8 +25,8 @@ export class Api {
     return this.http.get(this.url + '/' + endpoint, reqOpts);
   }
 
-  post(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.post(this.url + '/' + endpoint, body, reqOpts);
+  iniciarSesion(endpoint: string, body: any, reqOpts?: any) {
+    return this.http.post(this.url + '/users/' + endpoint, body, reqOpts);
   }
 
   put(endpoint: string, body: any, reqOpts?: any) {

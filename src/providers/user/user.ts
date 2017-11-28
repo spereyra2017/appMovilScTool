@@ -8,22 +8,17 @@ export class User {
 
   constructor(public api: Api) { }
 
-  /**
-   * Send a POST request to our login endpoint with the data
-   * the user entered on the form.
-   */
-  
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+    let seq = this.api.iniciarSesion('getLogin', accountInfo).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
+    
+      if (res != null) {
         this._loggedIn(res);
       } else {
       }
     }, err => {
-      console.error('ERROR', err);
+      console.error('Credenciales incorrectas', err);
     });
 
     return seq;
@@ -38,31 +33,12 @@ export class User {
     });
     return seq;
   }
-  signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
-
-    seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
-    }, err => {
-      console.error('ERROR', err);
-    });
-
-    return seq;
-  }
-
-  /**
-   * Log the user out, which forgets the session
-   */
+  
   logout() {
     this._user = null;
   }
 
-  /**
-   * Process a login/signup response to store user data
-   */
+
   _loggedIn(resp) {
     this._user = resp.user;
   }

@@ -20,7 +20,7 @@ class formData {
 export class LoginPage {
 
   private loginErrorString: string;
-  public username: AbstractControl;
+  public email: AbstractControl;
   public password: AbstractControl;
   loginForm: FormGroup;
   errorMessage: string = null;
@@ -34,21 +34,16 @@ export class LoginPage {
     private fb: FormBuilder) {
 
     this.loginForm = fb.group({
-      'username': ['', Validators.compose([Validators.required])],
+      'email': ['', Validators.compose([Validators.required])],
       'password': ['', Validators.compose([Validators.required])]
     });
 
 
-    this.username = this.loginForm.controls['username'];
+    this.email = this.loginForm.controls['email'];
     this.password = this.loginForm.controls['password'];
-
-
-
     //  this.translateService.get('LOGIN_ERROR').subscribe((value) => {
     //  this.loginErrorString = value;
     // })
-
-
   }
 
 
@@ -61,7 +56,7 @@ export class LoginPage {
   doLogin() {
     this.setDataForm();
     this.user.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push("MapPage");
+      this.navCtrl.push("SeleccionarMunicipioPage");
     }, (err) => {
       let toast = this.toastCtrl.create({
         message: err + "error !",
