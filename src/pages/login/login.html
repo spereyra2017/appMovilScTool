@@ -1,29 +1,29 @@
 <ion-header>
-  
-    <ion-navbar>
-      <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  <ion-content   >
-    <div padding>
-    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
-      <ion-item>
+
+  <ion-navbar>
+    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="custom_body">
+  <div padding class="custom_body">
+    <form [formGroup]="loginForm" (ngSubmit)="doLogin()" class="main-box">
+      <ion-item class="input-box">
         <ion-label floating>Usuario</ion-label>
         <ion-input [formControl]="email" type="email"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="input-box">
         <ion-label floating>Contraseña</ion-label>
         <ion-input [formControl]="password" type="password"></ion-input>
       </ion-item>
       <ion-item [hidden]="!errorMessage">
         <label>{{errorMessage}}</label>
       </ion-item>
-    </form>
-    </div>
-    <div padding>
   
-      <button ion-button primary block (click)="doLogin()" >Iniciar Sesion</button>
-    </div>
-  </ion-content>
+  
+    <button ion-button primary block (click)="doLogin()">Iniciar Sesion</button>
+  </form>
+  </div>
+  
+</ion-content>

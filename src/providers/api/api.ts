@@ -20,6 +20,9 @@ export class Api {
   getMunicipio(endpoint: string, params?: any, reqOpts?: any) {
     return this.http.get(this.url + '/municipalities/' + endpoint, reqOpts);
   }
+  getTypeLevelBySubambito(endpoint: string, params?: any, reqOpts?: any) {
+    return this.http.get(this.url + '/subambitostypelevel/' + endpoint+params, reqOpts);
+  }
   get(endpoint: string, params?: any, reqOpts?: any) {
 
     return this.http.get(this.url + '/' + endpoint, reqOpts);

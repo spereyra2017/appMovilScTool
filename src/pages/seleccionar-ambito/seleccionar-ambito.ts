@@ -2,13 +2,6 @@ import { Encuesta } from './../../providers/encuesta/encuesta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the SeleccionarAmbitoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage({
   name: 'SeleccionarAmbitoPage'
 })
@@ -28,6 +21,7 @@ export class SeleccionarAmbitoPage {
   public subAmbi = []; // LISTA PARA SABER LOS SUBAMBITOS DEL AMBITO ELEGIDO
   public idAmbito; //AUXILIAR PARA SABER CUAL AMBITO ELIGIO EL USER
   public arreglo: [any]; // LISTA PARA LOS AMBITOS DEL SISTEMA
+  public auxiliar;
 
   ionViewDidLoad() {
 
@@ -51,13 +45,26 @@ export class SeleccionarAmbitoPage {
 
   }
   siguientePagina(ambito, subAmbito) {
+
+    let idSub = this.getSubambitoById();
+    console.log("El id del subambi es: " + idSub);
+
     this.navCtrl.push("SeleccionarGradoPage", {
       ambito: this.ambito,
-      subAmbito: this.subAmbito
+      subAmbito: this.subAmbito,
+      idSubambito: idSub
     })
-
   }
-
+  getSubambitoById()
+  {
+      this.subAmbi.forEach(sub => {
+        if(sub.name == this.subAmbito)
+        {
+          this.auxiliar = sub.id;
+        }
+      });
+    return this.auxiliar;
+  } 
   ambitoElegido($steph){
     console.log($steph)
     this.arreglo.forEach(element => {

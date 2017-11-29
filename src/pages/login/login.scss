@@ -1,2 +1,67 @@
 page-login {
+
+    .custom_body {
+        background: linear-gradient(135deg, rgba(72, 214, 36, 0.98) 0%, rgba(56, 99, 255, 1) 107%, rgba(26, 35, 147, 1) 122%, rgba(111, 237, 46, 1) 100%);
+        float: left;
+        width: 100%;
+    }
+
+    .login_box {
+        margin:0 auto;
+        max-width: 400px;
+        min-width: 320px;
+        width: 100%;
+    }
+    .input-box {
+        float: left;
+        margin-bottom: 10px;
+        text-align: left;
+        width: 100%;
+    }
+    .i_icon {
+        border: medium none;
+        border-radius: 0;
+        color: #3965a0;
+        float: left;
+        padding: 12px;
+        top: 32px;
+        width: 40px;
+    }
+    .input_layout {
+        border: medium none;
+        border-radius: 0;
+        float: left;
+        height: 40px;
+        margin: 0;
+        padding: 0 10px;
+        width: 89%;
+    }
+    .main-box {
+        background: rgba(255, 251, 251, 0.41) none repeat scroll 0 0;
+        float: left;
+        margin-bottom: 100px;
+        margin-top: 100px;
+        padding: 50px 15px;
+        width: 100%;
+        border: 1px solid #fff;
+    }
+    .btn_style {
+        background-color:  rgba(57, 101, 160, 1);
+        color: #fff;
+        padding: 10px 0;
+        width: 100%;
+        border: none;
+    }
+    .btn_style:hover {
+        background-color: rgba(57, 101, 160, 1);
+        color: #ffffff;
+    }
+    
+    .bg-login{
+        
+                background-image: url('../../assets/img/.jpg') ;
+                background-repeat: no-repeat ;
+                background-position: center ;
+                background-size: contain ;
+            }
 }

@@ -18,6 +18,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 export class SeleccionarGradoPage {
   public ambito = this.navParams.get('ambito');
   public subAmbito = this.navParams.get('subAmbito');
+  public idSubambito = this.navParams.get('idSubambito');
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,13 +49,36 @@ export class SeleccionarGradoPage {
         this.gras = items;
         console.log("Los grados del subambito son: " );
         this.gras.forEach(element => {
+          
           console.log(element.name);
         });
        
       });
   }
+  getDegreesByTypeLevelId()
+  {
+    let idTypeLevel
+    //obtener id tipo level
+    this.encuesta.getTypeLevelBySubAmbiId(this.idSubambito)
+    .subscribe(level => {
+      let idTypeLevelString = JSON.stringify(level);
+      
+      idTypeLevel =  JSON.parse(idTypeLevelString, (key, value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
+        }
+        return value;
+      });
+
+    });
+    console.log("El typeLevel es: " + typeof idTypeLevel + " del subambito "+this.idSubambito);
+
+  } 
+
+  
 
   siguientePagina(gradoElegido, nivelElegido) {
+    this.getDegreesByTypeLevelId()
 
     var mensajeCreado = this.alertCtrl.create({
       title: "Encuesta realizada",

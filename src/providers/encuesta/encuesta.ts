@@ -51,4 +51,19 @@ export class Encuesta {
     return seq;
   }
 
+  getTypeLevelBySubAmbiId(idSubambito)
+  {
+    let id = this.api.getTypeLevelBySubambito('getSubAmbitosTypeLevel?id=', idSubambito).share();
+    
+        id.subscribe((res: any) => {
+          if (res.status == 'success') {
+            //this._loggedIn(res);
+          } else {
+          }
+        }, err => {
+          console.error('ERROR', err);
+        });
+    
+        return id;
+  }
 }
