@@ -36,8 +36,8 @@ export class Encuesta {
     });
     return seq;
   }
-  crearEncuesta(infoEncuesta: any) {
-    let seq = this.api.get('addSurvey', infoEncuesta).share();
+ /* createSurvey(infoEncuesta: any) {
+    let seq = this.api.addSurvey('addSurvey', infoEncuesta).share();
 
     seq.subscribe((res: any) => {
       if (res.status == 'success') {
@@ -50,20 +50,37 @@ export class Encuesta {
 
     return seq;
   }
-
-  getTypeLevelBySubAmbiId(idSubambito)
+*/
+  getTypeLevelBySubAmbiId(idSubambito: any)
   {
-    let id = this.api.getTypeLevelBySubambito('getSubAmbitosTypeLevel?id=', idSubambito).share();
+
+    console.log("El id subambi es: "+idSubambito );
+    let subAmbitoTypeLevel = this.api.getTypeLevelBySubambito('getSubAmbitosTypeLevel?id=', idSubambito).share();
     
-        id.subscribe((res: any) => {
-          if (res.status == 'success') {
-            //this._loggedIn(res);
-          } else {
-          }
-        }, err => {
-          console.error('ERROR', err);
+    subAmbitoTypeLevel.subscribe((res: any) => {
+
         });
-    
-        return id;
+        return subAmbitoTypeLevel;
+  }
+  getTypeLevels(){
+
+    let allTypeLevels = this.api.getTypeLevels('all').share();
+    allTypeLevels.subscribe((res: any) => {
+
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return allTypeLevels;
+  }
+
+  getAllLevels()
+  {
+    let allLevels = this.api.getAllLevels('all').share();
+    allLevels.subscribe((res: any) => {
+      
+          }, err => {
+            console.error('ERROR', err);
+          });
+          return allLevels;
   }
 }

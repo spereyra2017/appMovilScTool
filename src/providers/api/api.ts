@@ -23,11 +23,14 @@ export class Api {
   getTypeLevelBySubambito(endpoint: string, params?: any, reqOpts?: any) {
     return this.http.get(this.url + '/subambitostypelevel/' + endpoint+params, reqOpts);
   }
-  get(endpoint: string, params?: any, reqOpts?: any) {
+  getTypeLevels(endpoint: string, params?: any, reqOpts?: any) {
 
-    return this.http.get(this.url + '/' + endpoint, reqOpts);
+    return this.http.get(this.url + '/typesLevels/' + endpoint, reqOpts);
   }
-
+  getAllLevels(endpoint: string, params?: any, reqOpts?: any) {
+    
+        return this.http.get(this.url + '/levels/' + endpoint, reqOpts);
+  }  
   iniciarSesion(endpoint: string, body: any, reqOpts?: any) {
     return this.http.post(this.url + '/users/' + endpoint, body, reqOpts);
   }

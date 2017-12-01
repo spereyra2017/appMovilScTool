@@ -1,12 +1,6 @@
 import { Encuesta } from './../../providers/encuesta/encuesta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-/**
- * Generated class for the SeleccionarGradoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
   name: "SeleccionarGradoPage"
@@ -31,10 +25,12 @@ export class SeleccionarGradoPage {
   public nivel;
   public nivs: [any];
   public gras: [any];
+  public degreesByTypeLevel: [any];
+  public nivelesCompletos :[any];
 
   ionViewDidLoad() {
 
-    console.log("ambito: " + this.ambito + "Subambito: " + this.subAmbito);
+   // console.log("ambito: " + this.ambito + "Subambito: " + this.subAmbito);
     this.encuesta.selectGrado()
       .subscribe(grados => {
 
@@ -58,20 +54,64 @@ export class SeleccionarGradoPage {
   getDegreesByTypeLevelId()
   {
     let idTypeLevel
+    let auxTypeId ;
     //obtener id tipo level
     this.encuesta.getTypeLevelBySubAmbiId(this.idSubambito)
-    .subscribe(level => {
-      let idTypeLevelString = JSON.stringify(level);
-      
-      idTypeLevel =  JSON.parse(idTypeLevelString, (key, value) => {
+    .subscribe(typeLevel => {
+
+      const idTypeLevelString = JSON.stringify(typeLevel);
+      const oneLevel = JSON.parse(idTypeLevelString, (key, value) => {
         if (typeof value === 'string') {
           return value.toUpperCase();
         }
         return value;
       });
 
+      console.log("El valor de level atributo es: "+oneLevel + " " + typeof oneLevel);
+       auxTypeId = Number(oneLevel.id);
+      console.log("Ahora siendo int es: " + auxTypeId); 
     });
-    console.log("El typeLevel es: " + typeof idTypeLevel + " del subambito "+this.idSubambito);
+
+
+    /*this.encuesta.getTypeLevels()
+    .subscribe(auxTypeLevel => {
+      
+      let auxTypeLevelString = JSON.stringify(auxTypeLevel);
+      auxTypeLevelString = JSON.parse(auxTypeLevelString, (key,value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
+        }
+        return value;
+      });
+    });
+*/
+
+    this.encuesta.getAllLevels()
+    .subscribe(levelAux => {
+
+      const levelString = JSON.stringify(levelAux);
+      const allLevels = JSON.parse(levelString, (key, value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
+        }
+        return value;
+      });
+      
+      this.nivs = allLevels;
+      console.log("Que es allLevels?? : " +allLevels );
+      this.nivs.forEach(element => {
+        console.log("element1 es: " +element.degreeId + " "+typeof element.degreeId +" " );
+      
+        console.log("auxTypeId es: " +auxTypeId + typeof auxTypeId);
+
+        if (element.degreeId == auxTypeId) {
+          console.log("element2 es: " +element);
+        //  this.nivelesCompletos.push(element); //aca me trae una lista de objs niveles
+        }
+      });
+//      console.log(element);
+      console.log("La lista de niveles es: " + this.nivelesCompletos);
+    });
 
   } 
 
