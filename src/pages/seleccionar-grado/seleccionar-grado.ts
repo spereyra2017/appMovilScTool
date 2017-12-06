@@ -100,12 +100,12 @@ export class SeleccionarGradoPage {
       this.nivs = allLevels;
       console.log("Que es allLevels?? : " +allLevels );
       this.nivs.forEach(element => {
-        console.log("element1 es: " +element.degreeId + " "+typeof element.degreeId +" " );
+        console.log("element de nivel es: " +element.degreeId + " "+typeof element.degreeId +" " );
       
         console.log("auxTypeId es: " +auxTypeId + typeof auxTypeId);
 
         if (element.degreeId == auxTypeId) {
-          console.log("element2 es: " +element);
+          console.log("Element.degree es igual al degree elegido: " +element);
         //  this.nivelesCompletos.push(element); //aca me trae una lista de objs niveles
         }
       });
@@ -126,7 +126,7 @@ export class SeleccionarGradoPage {
         {
           text: 'Aceptar',
           handler: () => {
-            //  this.navCtrl.push("SeleccionarMunicipioPage")
+              this.navCtrl.push("SeleccionarMunicipioPage")
           }
         }
       ]

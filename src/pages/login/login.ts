@@ -1,3 +1,4 @@
+import { StatusBar } from '@ionic-native/status-bar';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -49,15 +50,33 @@ export class LoginPage {
 
 
   public setDataForm(): void {
-    this.usuario.USERNAME = this.loginForm.value.username;
+    this.usuario.USERNAME = this.loginForm.value.email;
     this.usuario.PASSWORD = this.loginForm.value.password;
   }
   // Attempt to login in through our User service
   doLogin() {
     this.setDataForm();
     this.user.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push("SeleccionarMunicipioPage");
+      console.log("Response es: " + resp.toString);
+      const usuario = JSON.stringify(resp);
+      console.log("responseAsString is : " + usuario);
+      const usuarioJSON = JSON.parse(usuario, (key, value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
+        }
+        return value;
+      });
+
+      console.log("El obj es: "  + typeof usuarioJSON + "usuarioJSN: " + usuarioJSON.response);
+        if (usuarioJSON.response ==  "LOGIN CORRECTO") {
+               
+          this.navCtrl.push("SeleccionarMunicipioPage");
+        }else
+      {
+        console.log("Credenciales incorrectas");
+      }
     }, (err) => {
+      console.log("Erro es: "+err);
       let toast = this.toastCtrl.create({
         message: err + "error !",
         duration: 3000,
