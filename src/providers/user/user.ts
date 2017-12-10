@@ -8,11 +8,8 @@ export class User {
 
   constructor(public api: Api) { }
 
-  login(accountInfo: any) {
-    let usuario={
-      "email":accountInfo.USERNAME,
-      "password":accountInfo.PASSWORD
-    }
+  login(usuario: any) {
+    
     console.log(usuario)
     let seq = this.api.iniciarSesion('getLogin', usuario).share();
     seq.subscribe((res: any) => {

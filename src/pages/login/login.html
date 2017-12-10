@@ -8,20 +8,18 @@
 
 <ion-content class="custom_body">
   <div padding class="custom_body">
-    <form [formGroup]="loginForm" class="main-box">
-      <ion-item class="input-box">
-        <ion-label floating>Usuario</ion-label>
-        <ion-input [formControl]="email" type="email"></ion-input>
-      </ion-item>
-      <ion-item class="input-box">
-        <ion-label floating>Contraseña</ion-label>
-        <ion-input [formControl]="password" type="password"></ion-input>
-      </ion-item>
-     
-  
-  
-    <button ion-button primary block (click)="doLogin()">Iniciar Sesion</button>
-  </form>
+    <ion-label>email</ion-label>
+    <ion-item>
+      <ion-input ion-input [(ngModel)]="email"  type="email"></ion-input>
+    </ion-item>
+    <ion-label>password</ion-label>
+    <ion-item>
+      <ion-input ion-input [(ngModel)]="password" [disabled]="!email"  type="password"></ion-input>
+    </ion-item>
+
+    <button ion-button [disabled]="!email || !password" (click)="doLogin(email,password)">
+      Siguiente
+    </button>
   </div>
-  
+
 </ion-content>
