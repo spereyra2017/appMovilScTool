@@ -30,7 +30,7 @@
       <ion-item >
         <ion-label>Nivel</ion-label>
         <ion-select [(ngModel)]="nivel" [disabled]="!grado">
-            <ion-option *ngFor="let key of this.nivs" value="{{key.name}}">{{key.name}}</ion-option>
+            <ion-option *ngFor="let key of this.nivs2" value="{{key}}">{{key}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>

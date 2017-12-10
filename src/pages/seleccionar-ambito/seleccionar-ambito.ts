@@ -13,8 +13,10 @@ export class SeleccionarAmbitoPage {
   public municipio = this.navParams.get('municipio');
   public ambito
   public subAmbito
-  constructor(public navCtrl: NavController, public navParams: NavParams
-    , public encuesta: Encuesta) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public encuesta: Encuesta) {
   }
 
   public ambi = []; //
@@ -27,7 +29,6 @@ export class SeleccionarAmbitoPage {
 
     this.encuesta.selectAmbito()
       .subscribe(ambitos => {
-
         const userStr = JSON.stringify(ambitos);
         const items = JSON.parse(userStr, (key, value) => {
           if (typeof value === 'string') {
@@ -35,47 +36,34 @@ export class SeleccionarAmbitoPage {
           }
           return value;
         });
-        
         this.arreglo = items; // GUARDO LOS AMBITOS DEL SISTEMA
         this.arreglo.forEach(element => { // RECORRO LOS AMBITOS 
           this.ambi.push(element); // GUARDO EL NOMBRE DE CADA AMBITO EN UN ARRAY
         });
-
-      });      
-
+      });
   }
   siguientePagina(ambito, subAmbito) {
-
     let idSub = this.getSubambitoById();
-    console.log("El id del subambi es: " + idSub);
-
     this.navCtrl.push("SeleccionarGradoPage", {
       ambito: this.ambito,
       subAmbito: this.subAmbito,
       idSubambito: idSub
     })
   }
-  getSubambitoById()
-  {
-      this.subAmbi.forEach(sub => {
-        if(sub.name == this.subAmbito)
-        {
-          this.auxiliar = sub.id;
-        }
-      });
-    return this.auxiliar;
-  } 
-  ambitoElegido($steph){
-    console.log($steph)
-    this.arreglo.forEach(element => {
-      if(element.name == this.ambito){
-        this.idAmbito = element.id;
-        console.log("El id del ambito elegido es: " + this.idAmbito);   
-        this.subAmbi=element.subAmbitos;
-        
-      } 
+  getSubambitoById() {
+    this.subAmbi.forEach(sub => {
+      if (sub.name == this.subAmbito) {
+        this.auxiliar = sub.id;
+      }
     });
-  
-
+    return this.auxiliar;
+  }
+  ambitoElegido($ambi) {
+    this.arreglo.forEach(element => {
+      if (element.name == this.ambito) {
+        this.idAmbito = element.id;
+        this.subAmbi = element.subAmbitos;
+      }
+    });
   }
 }

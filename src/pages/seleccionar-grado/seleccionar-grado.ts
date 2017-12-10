@@ -26,11 +26,11 @@ export class SeleccionarGradoPage {
   public nivs: [any];
   public gras: [any];
   public degreesByTypeLevel: [any];
-  public nivelesCompletos :[any];
+  public nivs2: any[] = [];;
 
   ionViewDidLoad() {
 
-   // console.log("ambito: " + this.ambito + "Subambito: " + this.subAmbito);
+    // console.log("ambito: " + this.ambito + "Subambito: " + this.subAmbito);
     this.encuesta.selectGrado()
       .subscribe(grados => {
 
@@ -41,84 +41,65 @@ export class SeleccionarGradoPage {
           }
           return value;
         });
-        
+
         this.gras = items;
-        console.log("Los grados del subambito son: " );
         this.gras.forEach(element => {
-          
-          console.log(element.name);
+          //
         });
-       
+
       });
   }
-  getDegreesByTypeLevelId()
-  {
+
+  gradoElegido($event) {
+    //let gradoAux = $event hay que cargar aca el array de levelsCompletos?,si ya esta echo,
+    this.getDegreesByTypeLevelId()
+
+    console.log($event);
+  }
+
+  getDegreesByTypeLevelId() {
     let idTypeLevel
-    let auxTypeId ;
+    let auxTypeId;
     //obtener id tipo level
     this.encuesta.getTypeLevelBySubAmbiId(this.idSubambito)
-    .subscribe(typeLevel => {
+      .subscribe(typeLevel => {
 
-      const idTypeLevelString = JSON.stringify(typeLevel);
-      const oneLevel = JSON.parse(idTypeLevelString, (key, value) => {
-        if (typeof value === 'string') {
-          return value.toUpperCase();
-        }
-        return value;
+        const idTypeLevelString = JSON.stringify(typeLevel);
+        const oneLevel = JSON.parse(idTypeLevelString, (key, value) => {
+          if (typeof value === 'string') {
+            return value.toUpperCase();
+          }
+          return value;
+        });
+        auxTypeId = Number(oneLevel.id);
       });
-
-      console.log("El valor de level atributo es: "+oneLevel + " " + typeof oneLevel);
-       auxTypeId = Number(oneLevel.id);
-      console.log("Ahora siendo int es: " + auxTypeId); 
-    });
-
-
-    /*this.encuesta.getTypeLevels()
-    .subscribe(auxTypeLevel => {
-      
-      let auxTypeLevelString = JSON.stringify(auxTypeLevel);
-      auxTypeLevelString = JSON.parse(auxTypeLevelString, (key,value) => {
-        if (typeof value === 'string') {
-          return value.toUpperCase();
-        }
-        return value;
-      });
-    });
-*/
-
     this.encuesta.getAllLevels()
-    .subscribe(levelAux => {
+      .subscribe(levelAux => {
 
-      const levelString = JSON.stringify(levelAux);
-      const allLevels = JSON.parse(levelString, (key, value) => {
-        if (typeof value === 'string') {
-          return value.toUpperCase();
-        }
-        return value;
-      });
-      
-      this.nivs = allLevels;
-      console.log("Que es allLevels?? : " +allLevels );
-      this.nivs.forEach(element => {
-        console.log("element de nivel es: " +element.degreeId + " "+typeof element.degreeId +" " );
-      
-        console.log("auxTypeId es: " +auxTypeId + typeof auxTypeId);
+        const levelString = JSON.stringify(levelAux);
+        const allLevels = JSON.parse(levelString, (key, value) => {
+          if (typeof value === 'string') {
+            return value.toUpperCase();
+          }
+          return value;
+        });
 
-        if (element.degreeId == auxTypeId) {
-          console.log("Element.degree es igual al degree elegido: " +element);
-        //  this.nivelesCompletos.push(element); //aca me trae una lista de objs niveles
-        }
-      });
-//      console.log(element);
-      console.log("La lista de niveles es: " + this.nivelesCompletos);
-    });
+        this.nivs = allLevels;// no es nivs2 ?si hago eso, se rompe todo, quizas es la forma en la que copias un array a otro?mira
+        this.nivs.forEach(element => {
+          //console.log("element de nivel es: " + element.degreeId + " ");
+          if (element.degreeId == auxTypeId) {
+            console.log( element.name )
+            this.nivs2.push(element.name)// capaz que esta mal la sintaxis del push o algo de eso,creo que es el html
+            console.log(this.nivs2)
+          }
+        });
+      });      
+  }
 
-  } 
 
-  
 
   siguientePagina(gradoElegido, nivelElegido) {
-    this.getDegreesByTypeLevelId()
+    console.log(gradoElegido + "//" + nivelElegido)
 
     var mensajeCreado = this.alertCtrl.create({
       title: "Encuesta realizada",
@@ -126,7 +107,7 @@ export class SeleccionarGradoPage {
         {
           text: 'Aceptar',
           handler: () => {
-              this.navCtrl.push("SeleccionarMunicipioPage")
+            // this.navCtrl.push("SeleccionarMunicipioPage")
           }
         }
       ]
@@ -162,10 +143,5 @@ export class SeleccionarGradoPage {
   }
 
 
-
-
-  gradoElegido($event) {
-    console.log($event);
-  }
 
 }

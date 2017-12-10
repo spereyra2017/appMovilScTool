@@ -33,8 +33,8 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     private fb: FormBuilder) {
-     
-  
+
+
 
 
 
@@ -45,47 +45,46 @@ export class LoginPage {
 
 
 
- 
+
   // Attempt to login in through our User service
-  doLogin(email,password) {
+  doLogin(email, password) {
 
-    let usuarioAuxiliar ;
+    let usuarioAuxiliar;
     usuarioAuxiliar = {
-      "email":email, 
-      "password":password
+      "email": email,
+      "password": password
     };
-     console.log("Usuario auxiliar es: "+ usuarioAuxiliar);
-      this.user.login(usuarioAuxiliar).subscribe((resp) => {
-        console.log("Response es: " + resp.toString);
-        const usuario = JSON.stringify(resp);
-        console.log("responseAsString is : " + usuario);
-        const usuarioJSON = JSON.parse(usuario, (key, value) => {
-          if (typeof value === 'string') {
-            return value.toUpperCase();
-          }
-          return value;
-        });
-
-        console.log("El obj es: " + typeof usuarioJSON + "usuarioJSN: " + usuarioJSON.response);
-        let toast : any;
-
-        if (usuarioJSON.response == "LOGIN CORRECTO") {
-
-          this.navCtrl.push("SeleccionarMunicipioPage");
-        } else {
-          toast = this.toastCtrl.create({
-            message: "Credenciales incorrectas",
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
-
-          console.log("Credenciales incorrectas");
+    this.user.login(usuarioAuxiliar).subscribe((resp) => {
+      const usuario = JSON.stringify(resp);
+      const usuarioJSON = JSON.parse(usuario, (key, value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
         }
-      }, (err) => {
-        console.log("Erro es: " + err);
-         
+        return value;
       });
-   
+
+
+      if (usuarioJSON.response == "OK") {
+        this.navCtrl.push("SeleccionarMunicipioPage");
+      } else {
+        let mensaje: any;
+        mensaje = this.toastCtrl.create({
+          message: "Correo o contraseña incorrectas",
+          duration: 3000,
+          position: 'bot'
+        });
+        mensaje.present();
+      }
+    }, (err) => {
+      let error: any;
+      error = this.toastCtrl.create({
+        message: "Correo o contraseña incorrectas",
+        duration: 3000,
+        position: 'bot'
+      });
+      error.present();
+
+    });
+
   }
 }

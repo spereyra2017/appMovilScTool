@@ -24,7 +24,7 @@ export class SeleccionarMunicipioPage {
   }
   public Municipio;
   public items;
-  public muni= [];
+  public muni = [];
 
 
   ionViewDidLoad() {
@@ -38,18 +38,14 @@ export class SeleccionarMunicipioPage {
           }
           return value;
         });
-        console.log(items);
         let arreglo: [any];
-
         arreglo = items;
         arreglo.forEach(element => {
-          this.muni.push( element.name) ;
+          this.muni.push(element.name);
         });
       })
   }
   siguientePagina() {
-    console.log(this.Municipio);
-    
     this.navCtrl.push("SeleccionarAmbitoPage", {
       municipio: this.Municipio
     })

@@ -11,9 +11,8 @@ export class User {
   login(usuario: any) {
     
     console.log(usuario)
-    let seq = this.api.iniciarSesion('getLogin', usuario).share();
+    let seq = this.api.iniciarSesion('getLoginApp', usuario).share();
     seq.subscribe((res: any) => {
-    
       if (res != null) {
         this._loggedIn(res);
       } else {
