@@ -65,8 +65,11 @@ export class LoginPage {
 
 
       if (usuarioJSON.response == "OK") {
-        this.navCtrl.push("SeleccionarMunicipioPage");
-      } else {
+        this.navCtrl.push("SeleccionarMunicipioPage", {
+          credenciales: usuarioAuxiliar
+        });
+      } else if(usuarioJSON.response == "ERROR"){
+        
         let mensaje: any;
         mensaje = this.toastCtrl.create({
           message: "Correo o contraseña incorrectas",

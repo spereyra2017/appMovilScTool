@@ -36,21 +36,24 @@ export class Encuesta {
     });
     return seq;
   }
- /* createSurvey(infoEncuesta: any) {
-    let seq = this.api.addSurvey('addSurvey', infoEncuesta).share();
-
+  crearEncuesta(infoEncuesta: any) {
+    console.log("InfoEncuesta json es:  "+infoEncuesta)
+    let seq = this.api.addSurveyFirst('add', infoEncuesta).share();
     seq.subscribe((res: any) => {
-      if (res.status == 'success') {
+      if (res == null) {
+        console.log("Encuesta ya existe.");
         //this._loggedIn(res);
       } else {
+        // if(resp.surveys.getState() == "activa") la encuesta se creo correctamente
+        console.log("Encuesta creada.");
       }
     }, err => {
       console.error('ERROR', err);
     });
-
+    console.log("Paso el if-else de la subscription");
     return seq;
   }
-*/
+
   getTypeLevelBySubAmbiId(idSubambito: any)
   {
 

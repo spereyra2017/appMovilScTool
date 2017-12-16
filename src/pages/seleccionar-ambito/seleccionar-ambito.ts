@@ -11,6 +11,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SeleccionarAmbitoPage {
   public municipio = this.navParams.get('municipio');
+  public credenciales = this.navParams.get('credenciales');
   public ambito
   public subAmbito
   constructor(
@@ -36,7 +37,7 @@ export class SeleccionarAmbitoPage {
           }
           return value;
         });
-        this.arreglo = items; // GUARDO LOS AMBITOS DEL SISTEMA
+        this.arreglo = items; // GUARDO LOS AMBITOS DEL SISTEMA 
         this.arreglo.forEach(element => { // RECORRO LOS AMBITOS 
           this.ambi.push(element); // GUARDO EL NOMBRE DE CADA AMBITO EN UN ARRAY
         });
@@ -47,7 +48,9 @@ export class SeleccionarAmbitoPage {
     this.navCtrl.push("SeleccionarGradoPage", {
       ambito: this.ambito,
       subAmbito: this.subAmbito,
-      idSubambito: idSub
+      idSubambito: idSub,
+      municipio: this.municipio,
+      credenciales: this.credenciales
     })
   }
   getSubambitoById() {

@@ -35,7 +35,10 @@
       </ion-item>
     </ion-list>
   </div>
+  <button ion-button [disabled]="!grado && !nivel" (click)="siguientePagina(grado,nivel)">   
+    Crear encuesta
+  </button>
   <button ion-button [disabled]="!grado && !nivel" (click)="siguientePagina(grado,nivel)">
-    Enviar encuesta parcial
+    Guardar encuesta
   </button>
 </ion-content>

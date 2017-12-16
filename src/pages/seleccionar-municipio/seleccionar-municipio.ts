@@ -25,7 +25,8 @@ export class SeleccionarMunicipioPage {
   public Municipio;
   public items;
   public muni = [];
-
+  public credenciales = this.navParams.get('credenciales');
+  public municipioTieneEncuestaAbierta;
 
   ionViewDidLoad() {
     this.encuesta.selectMunicipio()
@@ -47,7 +48,8 @@ export class SeleccionarMunicipioPage {
   }
   siguientePagina() {
     this.navCtrl.push("SeleccionarAmbitoPage", {
-      municipio: this.Municipio
+      municipio: this.Municipio,
+      credenciales: this.credenciales
     })
   }
 }
