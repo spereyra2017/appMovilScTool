@@ -36,36 +36,49 @@ export class Encuesta {
     });
     return seq;
   }
-  crearEncuesta(infoEncuesta: any) {
-    console.log("InfoEncuesta json es:  "+infoEncuesta)
-    let seq = this.api.addSurveyFirst('add', infoEncuesta).share();
+
+  actualizarEncuesta(infoEncuesta: any) {
+
+    let seq = this.api.addSurveyFirst('addSurvey', infoEncuesta).share();
     seq.subscribe((res: any) => {
-      if (res == null) {
-        console.log("Encuesta ya existe.");
-        //this._loggedIn(res);
-      } else {
-        // if(resp.surveys.getState() == "activa") la encuesta se creo correctamente
-        console.log("Encuesta creada.");
+      if (res) {
+        console.log("Encuesta actualizada.");
       }
     }, err => {
       console.error('ERROR', err);
     });
-    console.log("Paso el if-else de la subscription");
     return seq;
   }
+  crearEncuesta(infoEncuesta: any) {
 
-  getTypeLevelBySubAmbiId(idSubambito: any)
-  {
+    let seq = this.api.addSurveyFirst('add', infoEncuesta).share();
+    seq.subscribe((res: any) => {
+      console.log("se creo una encuesta");
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return seq;
+  }
+  getAllSurveys() {
 
-    console.log("El id subambi es: "+idSubambito );
+    let todasLasEncuestas = this.api.getAllSurveys('all').share();
+
+    todasLasEncuestas.subscribe((res: any) => {
+
+    });
+    return todasLasEncuestas;
+  }
+  getTypeLevelBySubAmbiId(idSubambito: any) {
+
+    console.log("El id subambi es: " + idSubambito);
     let subAmbitoTypeLevel = this.api.getTypeLevelBySubambito('getSubAmbitosTypeLevel?id=', idSubambito).share();
-    
+
     subAmbitoTypeLevel.subscribe((res: any) => {
 
-        });
-        return subAmbitoTypeLevel;
+    });
+    return subAmbitoTypeLevel;
   }
-  getTypeLevels(){
+  getTypeLevels() {
 
     let allTypeLevels = this.api.getTypeLevels('all').share();
     allTypeLevels.subscribe((res: any) => {
@@ -76,14 +89,13 @@ export class Encuesta {
     return allTypeLevels;
   }
 
-  getAllLevels()
-  {
+  getAllLevels() {
     let allLevels = this.api.getAllLevels('all').share();
     allLevels.subscribe((res: any) => {
-      
-          }, err => {
-            console.error('ERROR', err);
-          });
-          return allLevels;
+
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return allLevels;
   }
 }

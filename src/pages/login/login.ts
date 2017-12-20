@@ -34,10 +34,6 @@ export class LoginPage {
     public translateService: TranslateService,
     private fb: FormBuilder) {
 
-
-
-
-
     //  this.translateService.get('LOGIN_ERROR').subscribe((value) => {
     //  this.loginErrorString = value;
     // })

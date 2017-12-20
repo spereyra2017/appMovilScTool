@@ -17,6 +17,8 @@ export class SeleccionarGradoPage {
   public idSubambito = this.navParams.get('idSubambito');
   public municipio = this.navParams.get('municipio');
   public credenciales = this.navParams.get('credenciales');
+  public verificarExistenciaEncuesta;
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,6 +61,10 @@ export class SeleccionarGradoPage {
       });
     this.obtenerIdUsuario()
     this.obtenerIdMunicipalidad()
+    //stringify
+
+
+
   }
 
   gradoElegido($event) {
@@ -141,140 +147,74 @@ export class SeleccionarGradoPage {
       this.idUsuario = usuarioJSON.id
     });
   }
+
   siguientePagina(gradoElegido, nivelElegido) {
-    //var CurrentDate = moment().toISOString();
-    console.log("User id = " + this.idUsuario);
-    let userr = {
-      "userId": this.idUsuario,//id usuario
-      "municipalityId": this.idMunicipio //id municipalidad.
+    let cuerpoEncuesta = {
+      id: "",
+      initialdate: "",
+      finaldate: "",
+      state: "",
+      userId: this.idUsuario,
+      municipalityId: this.idMunicipio
     }
-    console.log("Userr  = " + userr);
-    /*string jsonString = ""municipalityId": 4 ,
-    "userId": 1";
-       "state": "activa",
-        "userId": 0,
-        "municipalityId": 1*/
-    
-    let cuerpoEncuesta = JSON.stringify({
-      id: 1,
-      initialdate: 1513298411000,
-      finaldate: 1513298411000,
-      state: "activa",
-      userId: 1,
-      municipalityId: 4
-    })
-    const userJSON = JSON.parse(cuerpoEncuesta, (key, value) => {
-      if (typeof value === 'string') {
-        return value.toUpperCase();
-      }
-      return value;
-    });
-    console.log("json ::::"+userJSON)
-    //this.idUsuario,this.idMunicipio,
-    this.encuesta
-      .crearEncuesta(userJSON)
-      .subscribe(resp => {
-      console.log(resp)
-      })
-
-    var mensajeCreado = this.alertCtrl.create({
-      title: "Encuesta realizada",
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            console.log("Obj encuesta: " + this.encuesta);
-            this.navCtrl.push("SeleccionarMunicipioPage")
-          }
+    this.encuesta.getAllSurveys().subscribe(encuestaJSON => {
+      let surveys: any[] = []
+      const userStr = JSON.stringify(encuestaJSON);
+      const items = JSON.parse(userStr, (key, value) => {
+        if (typeof value === 'string') {
+          return value.toUpperCase();
         }
-      ]
+        return value;
+      });
+      surveys = items
+
+      surveys.forEach(element => {
+        if (element.municipalityId == this.idMunicipio &&
+          element.userId == this.idUsuario &&
+          element.state == "activa") {
+          console.log("Entre.");
+          const userStr = JSON.stringify(element);
+          const items = JSON.parse(userStr, (key, value) => {
+            if (typeof value === 'string') {
+              return value.toUpperCase();
+            }
+            return value;
+          });
+          console.log("element es: " + element);
+          this.verificarExistenciaEncuesta = items;
+        }
+      });
+
     });
-    mensajeCreado.present()
- 
-  }
-  siguientePaginaCrearEncuesta(gradoElegido, nivelElegido) {
-    //var CurrentDate = moment().toISOString();
-    console.log("User id = " + this.idUsuario);
-    let userr = {
-      "userId": this.idUsuario,//id usuario
-      "municipalityId": this.idMunicipio //id municipalidad.
-    }
-    const userStr = JSON.stringify(userr);
-    const userJSON = JSON.parse(userStr, (key, value) => {
-      if (typeof value === 'string') {
-        return value.toUpperCase();
-      }
-      return value;
-    });
-    console.log("typeof userJSON: " + typeof userJSON)
-    // let now = moment().format("yyyy-mm-dd");// 2017-12-10T20:10:33-03:00
-    //console.log(now)
-    this.encuesta
-      .crearEncuesta(userJSON)
-      .subscribe(resp => {
-        const u = JSON.stringify(resp);
-        const itemsJSON = JSON.parse(u, (key, value) => {
-          if (typeof value === 'string') {
-            return value.toUpperCase();
-          }
-          return value;
+    console.log(typeof this.verificarExistenciaEncuesta)
+    console.log(this.verificarExistenciaEncuesta)
+
+    if (this.verificarExistenciaEncuesta) {//si existe una encuesta, actualiza
+      this.encuesta.actualizarEncuesta(cuerpoEncuesta)
+        .subscribe(encuestaJSON => {
+          console.log("ESTOY ACTUALIZANDO ENCUESTA")
+
+          const encuestaStr = JSON.stringify(encuestaJSON);
+          const encuesta = JSON.parse(encuestaStr, (key, value) => {
+            if (typeof value === 'string') {
+              return value.toUpperCase();
+            }
+            return value;
+          });
         });
-        console.log("Crear encuesta tiene " + u);
-        console.log("itemsJSON de crear encuesta tiene: " + itemsJSON)
-      })
-
-    var mensajeCreado = this.alertCtrl.create({
-      title: "Encuesta realizada",
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            console.log("Obj encuesta: " + this.encuesta);
-            this.navCtrl.push("SeleccionarMunicipioPage")
-          }
-        }
-      ]
-    });
-    mensajeCreado.present()
-    let cuerpoEncuesta = JSON.stringify({
-      idUser: "",
-      municipio: "",
-      ambito: "",
-      subAmbito: "",
-      grado: "",
-      nivel: ""
-    })
-  }
-
-  siguientePaginaActualizarEncuesta(gradoElegido, nivelElegido) {
-
-    console.log("User id = " + this.idUsuario);
-    let userr = {
-      "userId": this.idUsuario,//id usuario
-      "municipalityId": this.idMunicipio //id municipalidad.
-    }
-    const userStr = JSON.stringify(userr);
-    const userJSON = JSON.parse(userStr, (key, value) => {
-      if (typeof value === 'string') {
-        return value.toUpperCase();
-      }
-      return value;
-    });
-    console.log("typeof userJSON: " + typeof userJSON)
-    this.encuesta
-      .crearEncuesta(userJSON)
-      .subscribe(resp => {
-        const u = JSON.stringify(resp);
-        const itemsJSON = JSON.parse(u, (key, value) => {
-          if (typeof value === 'string') {
-            return value.toUpperCase();
-          }
-          return value;
+    } else {
+      console.log("ESTOY CREANDO ENCUESTA")
+      this.encuesta.crearEncuesta(cuerpoEncuesta)
+        .subscribe(encuestaJSON => {
+          const encuestaStr = JSON.stringify(encuestaJSON);
+          const encuesta = JSON.parse(encuestaStr, (key, value) => {
+            if (typeof value === 'string') {
+              return value.toUpperCase();
+            }
+            return value;
+          });
         });
-        console.log("Crear encuesta tiene " + u);
-        console.log("itemsJSON de crear encuesta tiene: " + itemsJSON)
-      })
-
+    }
     var mensajeCreado = this.alertCtrl.create({
       title: "Encuesta realizada",
       buttons: [
@@ -282,22 +222,11 @@ export class SeleccionarGradoPage {
           text: 'Aceptar',
           handler: () => {
             console.log("Obj encuesta: " + this.encuesta);
-            this.navCtrl.push("SeleccionarMunicipioPage")
+            //this.navCtrl.push("SeleccionarMunicipioPage")
           }
         }
       ]
     });
     mensajeCreado.present()
-    let cuerpoEncuesta = JSON.stringify({
-      idUser: "",
-      municipio: "",
-      ambito: "",
-      subAmbito: "",
-      grado: "",
-      nivel: ""
-    })
   }
-
-
-
 }

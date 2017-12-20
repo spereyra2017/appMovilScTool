@@ -10,7 +10,9 @@ export class Api {
 
   constructor(public http: HttpClient) {
   }
-
+  getAllSurveys(endpoint: string, params?: any, reqOpts?: any){
+    return this.http.get(this.url + '/surveys/' + endpoint, reqOpts);
+  }
   getGrado(endpoint: string, params?: any, reqOpts?: any) {
     return this.http.get(this.url + '/degrees/' + endpoint, reqOpts);
   }
